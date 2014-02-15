@@ -1,3 +1,4 @@
+# https://github.com/JuliaLang/julia/blob/master/examples/wordcount.jl
 # "Map" function.
 # Takes a string. Returns a HashTable with the number of times each word 
 # appears in that string.
