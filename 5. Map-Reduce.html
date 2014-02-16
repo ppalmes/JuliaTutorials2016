@@ -1696,7 +1696,7 @@ init_mathjax();
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[]:
+In&nbsp;[1]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="n">addprocs</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
@@ -1709,7 +1709,7 @@ In&nbsp;[]:
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[]:
+In&nbsp;[2]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="n">nprocs</span><span class="p">()</span>
@@ -1718,11 +1718,30 @@ In&nbsp;[]:
 </div>
 </div>
 
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt output_prompt">
+    Out[2]:</div>
+<div class="box-flex1 output_subarea output_pyout">
+
+
+<pre>
+6
+</pre>
+
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[]:
+In&nbsp;[3]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="nd">@everywhere</span> <span class="n">function</span> <span class="n">par</span><span class="p">(</span><span class="n">I</span><span class="p">)</span>
@@ -1741,7 +1760,7 @@ In&nbsp;[]:
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[]:
+In&nbsp;[4]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="n">m</span><span class="o">=</span><span class="n">DArray</span><span class="p">(</span><span class="n">par</span><span class="p">,(</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">),[</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">])</span>
@@ -1750,11 +1769,54 @@ In&nbsp;[]:
 </div>
 </div>
 
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+	From worker 2:	(1:4,1:4)
+	From worker 2:	(4,4)
+	From worker 3:	(5:8,1:4)
+	From worker 3:	(4,4)
+	From worker 4:	(1:4,5:8)
+	From worker 4:	(4,4)
+	From worker 5:	(5:8,5:8)
+	From worker 5:	(4,4)
+
+</pre>
+</div>
+</div>
+
+<div class="hbox output_area"><div class="prompt output_prompt">
+    Out[4]:</div>
+<div class="box-flex1 output_subarea output_pyout">
+
+
+<pre>
+8x8 DArray{Int64,2,Array{Int64,2}}:
+ 2  2  2  2  4  4  4  4
+ 2  2  2  2  4  4  4  4
+ 2  2  2  2  4  4  4  4
+ 2  2  2  2  4  4  4  4
+ 3  3  3  3  5  5  5  5
+ 3  3  3  3  5  5  5  5
+ 3  3  3  3  5  5  5  5
+ 3  3  3  3  5  5  5  5
+</pre>
+
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[]:
+In&nbsp;[5]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="n">m</span><span class="o">.</span><span class="n">indexes</span>
@@ -1763,11 +1825,32 @@ In&nbsp;[]:
 </div>
 </div>
 
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt output_prompt">
+    Out[5]:</div>
+<div class="box-flex1 output_subarea output_pyout">
+
+
+<pre>
+2x2 Array{(Range1{Int64},Range1{Int64}),2}:
+ (1:4,1:4)  (1:4,5:8)
+ (5:8,1:4)  (5:8,5:8)
+</pre>
+
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[]:
+In&nbsp;[6]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="n">m</span><span class="o">.</span><span class="n">chunks</span>
@@ -1776,11 +1859,32 @@ In&nbsp;[]:
 </div>
 </div>
 
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt output_prompt">
+    Out[6]:</div>
+<div class="box-flex1 output_subarea output_pyout">
+
+
+<pre>
+2x2 Array{RemoteRef,2}:
+ RemoteRef(2,1,15)  RemoteRef(4,1,17)
+ RemoteRef(3,1,16)  RemoteRef(5,1,18)
+</pre>
+
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[]:
+In&nbsp;[7]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="n">fetch</span><span class="p">(</span><span class="nd">@spawnat</span> <span class="mi">2</span> <span class="n">localpart</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
@@ -1789,11 +1893,34 @@ In&nbsp;[]:
 </div>
 </div>
 
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt output_prompt">
+    Out[7]:</div>
+<div class="box-flex1 output_subarea output_pyout">
+
+
+<pre>
+4x4 Array{Int64,2}:
+ 2  2  2  2
+ 2  2  2  2
+ 2  2  2  2
+ 2  2  2  2
+</pre>
+
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[]:
+In&nbsp;[8]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="n">procs</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
@@ -1802,11 +1929,34 @@ In&nbsp;[]:
 </div>
 </div>
 
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt output_prompt">
+    Out[8]:</div>
+<div class="box-flex1 output_subarea output_pyout">
+
+
+<pre>
+4-element Array{Int64,1}:
+ 2
+ 3
+ 4
+ 5
+</pre>
+
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[]:
+In&nbsp;[9]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="nb">map</span><span class="p">(</span><span class="n">fetch</span><span class="p">,{</span><span class="nd">@spawnat</span> <span class="n">p</span> <span class="nb">sum</span><span class="p">(</span><span class="n">localpart</span><span class="p">(</span><span class="n">m</span><span class="p">))</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">procs</span><span class="p">(</span><span class="n">m</span><span class="p">)})</span>
@@ -1815,11 +1965,34 @@ In&nbsp;[]:
 </div>
 </div>
 
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt output_prompt">
+    Out[9]:</div>
+<div class="box-flex1 output_subarea output_pyout">
+
+
+<pre>
+4-element Array{Any,1}:
+ 32
+ 48
+ 64
+ 80
+</pre>
+
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[]:
+In&nbsp;[10]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="nb">reduce</span><span class="p">(</span><span class="o">+</span><span class="p">,</span><span class="nb">map</span><span class="p">(</span><span class="n">fetch</span><span class="p">,{</span><span class="nd">@spawnat</span> <span class="n">p</span> <span class="nb">sum</span><span class="p">(</span><span class="n">localpart</span><span class="p">(</span><span class="n">m</span><span class="p">))</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">procs</span><span class="p">(</span><span class="n">m</span><span class="p">)}))</span>
@@ -1828,11 +2001,30 @@ In&nbsp;[]:
 </div>
 </div>
 
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt output_prompt">
+    Out[10]:</div>
+<div class="box-flex1 output_subarea output_pyout">
+
+
+<pre>
+224
+</pre>
+
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[]:
+In&nbsp;[11]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="c"># &quot;Map&quot; function.</span>
@@ -1855,7 +2047,7 @@ In&nbsp;[]:
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[]:
+In&nbsp;[12]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="c"># &quot;Reduce&quot; function.</span>
@@ -1920,7 +2112,7 @@ In&nbsp;[]:
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[]:
+In&nbsp;[13]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="c"># Splits input string into nprocs() equal-sized chunks (last one rounds up), </span>
@@ -1984,7 +2176,7 @@ In&nbsp;[]:
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[]:
+In&nbsp;[14]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="c"># Takes the name of a result file, and a list of input file names.</span>
@@ -2015,7 +2207,7 @@ In&nbsp;[]:
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[]:
+In&nbsp;[15]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="s">&quot;input1.txt&quot;</span><span class="p">,</span><span class="s">&quot;input2.txt&quot;</span><span class="p">,</span><span class="s">&quot;input2.txt&quot;</span><span class="p">]</span><span class="c">#&quot;input3.txt&quot;]</span>
@@ -2025,11 +2217,29 @@ In&nbsp;[]:
 </div>
 </div>
 
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+hello=9
+worlds=1
+world=8
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[]:
+In&nbsp;[16]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="n">a</span><span class="o">=</span><span class="n">rand</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
@@ -2038,11 +2248,56 @@ In&nbsp;[]:
 </div>
 </div>
 
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt output_prompt">
+    Out[16]:</div>
+<div class="box-flex1 output_subarea output_pyout">
+
+
+<pre>
+1000x1000 Array{Float64,2}:
+ 0.0517374  0.0152483   0.80411    …  0.479001    0.653943   0.0367196
+ 0.146748   0.848664    0.409353      0.31859     0.521018   0.734305 
+ 0.715162   0.259179    0.397266      0.491788    0.613991   0.180984 
+ 0.958573   0.494933    0.661546      0.136645    0.396342   0.580141 
+ 0.565306   0.121129    0.696058      0.970205    0.29401    0.469865 
+ 0.214514   0.669887    0.515675   …  0.417429    0.65146    0.330153 
+ 0.15334    0.719821    0.992338      0.444458    0.10136    0.387632 
+ 0.883156   0.115288    0.810726      0.381167    0.929734   0.765495 
+ 0.300044   0.991191    0.160662      0.855636    0.414701   0.235031 
+ 0.901976   0.87941     0.77229       0.00710375  0.169607   0.978175 
+ 0.799794   0.376283    0.118597   …  0.297163    0.699328   0.707928 
+ 0.295569   0.891411    0.914866      0.713082    0.428782   0.362351 
+ 0.470957   0.511056    0.697885      0.418426    0.936151   0.440171 
+ ⋮                                 ⋱                                  
+ 0.280302   0.00580387  0.288502      0.0155195   0.0120698  0.829593 
+ 0.171318   0.102613    0.149078      0.313723    0.768054   0.0986667
+ 0.116159   0.813688    0.229467   …  0.422101    0.546511   0.159127 
+ 0.178151   0.525928    0.815876      0.351391    0.992611   0.794671 
+ 0.285969   0.0739864   0.553199      0.79889     0.567411   0.827591 
+ 0.425504   0.668291    0.862984      0.667938    0.359662   0.929267 
+ 0.947711   0.279987    0.741968      0.55772     0.443613   0.11408  
+ 0.941318   0.0612145   0.893251   …  0.0408433   0.454859   0.0619818
+ 0.934473   0.822634    0.951973      0.811734    0.386578   0.480984 
+ 0.89429    0.63726     0.171954      0.498869    0.510155   0.454814 
+ 0.614473   0.912342    0.911658      0.210643    0.31863    0.605135 
+ 0.378741   0.341306    0.0657988     0.623196    0.164191   0.78803  
+</pre>
+
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[]:
+In&nbsp;[17]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="n">d</span><span class="o">=</span><span class="n">distribute</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
@@ -2051,11 +2306,56 @@ In&nbsp;[]:
 </div>
 </div>
 
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt output_prompt">
+    Out[17]:</div>
+<div class="box-flex1 output_subarea output_pyout">
+
+
+<pre>
+1000x1000 DArray{Float64,2,Array{Float64,2}}:
+ 0.0517374  0.0152483   0.80411    …  0.479001    0.653943   0.0367196
+ 0.146748   0.848664    0.409353      0.31859     0.521018   0.734305 
+ 0.715162   0.259179    0.397266      0.491788    0.613991   0.180984 
+ 0.958573   0.494933    0.661546      0.136645    0.396342   0.580141 
+ 0.565306   0.121129    0.696058      0.970205    0.29401    0.469865 
+ 0.214514   0.669887    0.515675   …  0.417429    0.65146    0.330153 
+ 0.15334    0.719821    0.992338      0.444458    0.10136    0.387632 
+ 0.883156   0.115288    0.810726      0.381167    0.929734   0.765495 
+ 0.300044   0.991191    0.160662      0.855636    0.414701   0.235031 
+ 0.901976   0.87941     0.77229       0.00710375  0.169607   0.978175 
+ 0.799794   0.376283    0.118597   …  0.297163    0.699328   0.707928 
+ 0.295569   0.891411    0.914866      0.713082    0.428782   0.362351 
+ 0.470957   0.511056    0.697885      0.418426    0.936151   0.440171 
+ ⋮                                 ⋱                                  
+ 0.280302   0.00580387  0.288502      0.0155195   0.0120698  0.829593 
+ 0.171318   0.102613    0.149078      0.313723    0.768054   0.0986667
+ 0.116159   0.813688    0.229467   …  0.422101    0.546511   0.159127 
+ 0.178151   0.525928    0.815876      0.351391    0.992611   0.794671 
+ 0.285969   0.0739864   0.553199      0.79889     0.567411   0.827591 
+ 0.425504   0.668291    0.862984      0.667938    0.359662   0.929267 
+ 0.947711   0.279987    0.741968      0.55772     0.443613   0.11408  
+ 0.941318   0.0612145   0.893251   …  0.0408433   0.454859   0.0619818
+ 0.934473   0.822634    0.951973      0.811734    0.386578   0.480984 
+ 0.89429    0.63726     0.171954      0.498869    0.510155   0.454814 
+ 0.614473   0.912342    0.911658      0.210643    0.31863    0.605135 
+ 0.378741   0.341306    0.0657988     0.623196    0.164191   0.78803  
+</pre>
+
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[]:
+In&nbsp;[19]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="nd">@time</span> <span class="nb">reduce</span><span class="p">(</span><span class="o">+</span><span class="p">,</span><span class="nb">map</span><span class="p">(</span><span class="n">fetch</span><span class="p">,[</span><span class="nd">@spawnat</span> <span class="n">p</span> <span class="nb">sum</span><span class="p">(</span><span class="n">localpart</span><span class="p">(</span><span class="n">d</span><span class="p">))</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">procs</span><span class="p">(</span><span class="n">d</span><span class="p">)]))</span>
@@ -2064,15 +2364,71 @@ In&nbsp;[]:
 </div>
 </div>
 
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+elapsed time: 0.006800079 seconds (295516 bytes allocated)
+
+</pre>
+</div>
+</div>
+
+<div class="hbox output_area"><div class="prompt output_prompt">
+    Out[19]:</div>
+<div class="box-flex1 output_subarea output_pyout">
+
+
+<pre>
+500086.18435936
+</pre>
+
+</div>
+</div>
+
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[]:
+In&nbsp;[21]:
 </div>
 <div class="input_area box-flex1">
 <div class="highlight"><pre><span class="nd">@time</span> <span class="nb">reduce</span><span class="p">(</span><span class="o">+</span><span class="p">,</span><span class="n">d</span><span class="p">)</span>
 </pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+elapsed time: 0.043511909 seconds (309876 bytes allocated)
+
+</pre>
+</div>
+</div>
+
+<div class="hbox output_area"><div class="prompt output_prompt">
+    Out[21]:</div>
+<div class="box-flex1 output_subarea output_pyout">
+
+
+<pre>
+500086.18435936
+</pre>
+
+</div>
+</div>
 
 </div>
 </div>

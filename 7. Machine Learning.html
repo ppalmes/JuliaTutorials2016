@@ -1693,62 +1693,55 @@ init_mathjax();
 </head>
 <body>
 
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Overview-of-the-Julia-Language">Overview of the Julia Language<a class="anchor-link" href="#Overview-of-the-Julia-Language">&#182;</a></h1>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[112]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="kn">import</span> <span class="nn">RDatasets</span>
+<span class="kn">import</span> <span class="nn">DataFrames</span>
+<span class="kn">import</span> <span class="nn">Clustering</span>
+<span class="kn">import</span> <span class="nn">SVM</span>
+<span class="kn">import</span> <span class="nn">DecisionTree</span>
+</pre></div>
+
+</div>
 </div>
 
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="References:">References:<a class="anchor-link" href="#References:">&#182;</a></h2>
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[112]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="c"># read data</span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">RDatasets</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="s">&quot;datasets&quot;</span><span class="p">,</span><span class="s">&quot;iris&quot;</span><span class="p">);</span>
+<span class="n">features</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="n">iris</span><span class="p">[:,</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">]);</span>
+<span class="n">labels</span> <span class="o">=</span> <span class="n">matrix</span><span class="p">(</span><span class="n">iris</span><span class="p">)[:,</span><span class="mi">6</span><span class="p">];</span>
+<span class="n">sz</span><span class="p">,</span><span class="n">ft</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">features</span><span class="p">);</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">randbool</span><span class="p">(</span><span class="n">sz</span><span class="p">)</span>
+<span class="n">test</span> <span class="o">=</span> <span class="err">!</span><span class="n">train</span><span class="p">;</span>
+</pre></div>
+
+</div>
 </div>
 
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>http://learnxinyminutes.com/docs/julia/</li>
-<li>http://dmbates.blogspot.com/2012/04/r-programmer-looks-at-julia.html</li>
-<li>http://www.r-bloggers.com/a-beginners-look-at-julia/</li>
-<li>https://github.com/JuliaLang/julia</li>
-<li>http://nbviewer.ipython.org/urls/raw.github.com/johnmyleswhite/DCStats.jl/master/Setup.ipynb</li>
-<li>http://julialang.org/blog/2012/03/shelling-out-sucks/</li>
-<li>http://docs.julialang.org/en/latest/manual/running-external-programs/</li>
-<li>http://julialang.org/blog/2013/04/put-this-in-your-pipe/</li>
-<li>http://julialang.org/blog/2013/09/fast-numeric/</li>
-<li>http://www.admin-magazine.com/HPC/Articles/Parallel-Julia-Jumping-Right-In</li>
-<li>http://web.mit.edu/julia_v1.24.13/www/index.html</li>
-<li>http://nbviewer.ipython.org/url/jdj.mit.edu/~stevenj/IJulia%2520Preview.ipynb</li>
-<li>http://strata.oreilly.com/2012/10/matlab-r-julia-languages-for-data-analysis.html</li>
-<li>http://asbidyarthy.blogspot.com/2012/06/julia-programming-language-downloads.html</li>
-<li>http://jurjenbokma.com/ApprenticesNotes/getting_statlinked_binaries_on_debian.html</li>
-</ul>
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Preliminaries">Preliminaries<a class="anchor-link" href="#Preliminaries">&#182;</a></h2>
-</div>
-
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Quitting Julia: [ctrl]-D or quit()</li>
-<li>Abort or clear current command: [ctrl]-C</li>
-<li>Parentheses ( ) are used for functions and multiple outputs</li>
-<li>Brackets [ ] are used for indexing</li>
-<li>Braces { } are used for arrays</li>
-<li>Running a file: include(&quot;file.jl&quot;) or require(&quot;file.jl&quot;)</li>
-<li>Printing values: print() or println()</li>
-<li><p>Deployment: main.jl #!/fullpath/julia</p>
-<p>arg=ARGS[1]; println(&quot;Hello $arg&quot;);</p></li>
-</ul>
-<p>in shell: ./main.jl World =&gt; Hello World</p>
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="External-Shell-Calls:">External Shell Calls:<a class="anchor-link" href="#External-Shell-Calls:">&#182;</a></h4>
+<h2 id="K-means-Clustering">K-means Clustering<a class="anchor-link" href="#K-means-Clustering">&#182;</a></h2>
 </div>
 
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[1]:
+In&nbsp;[112]:
 </div>
 <div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">run</span><span class="p">(</span><span class="sb">`cal`</span><span class="p">)</span>
+<div class="highlight"><pre><span class="n">nc</span><span class="o">=</span><span class="mi">3</span>
+<span class="n">km</span><span class="o">=</span><span class="n">Clustering</span><span class="o">.</span><span class="n">kmeans</span><span class="p">(</span><span class="n">features</span><span class="s">&#39;,nc);</span>
+<span class="n">centers</span><span class="o">=</span><span class="n">km</span><span class="o">.</span><span class="n">centers</span><span class="p">;</span>
 </pre></div>
 
 </div>
@@ -1761,14 +1754,15 @@ In&nbsp;[1]:
 <div class="hbox output_area"><div class="prompt"></div>
 <div class="box-flex1 output_subarea output_stream output_stdout">
 <pre>
-   February 2014
-Su Mo Tu We Th Fr Sa
-                   1
- 2  3  4  5  6  7  8
- 9 10 11 12 13 14 15
-16 17 18 19 20 21 22
-23 24 25 26 27 28
-
+  Iters               objv        objv-change | affected 
+-------------------------------------------------------------
+      1       9.215602e+01      -5.825398e+01 |        2
+      2       8.368890e+01      -8.467122e+00 |        3
+      3       7.986398e+01      -3.824915e+00 |        2
+      4       7.919714e+01      -6.668418e-01 |        2
+      5       7.885144e+01      -3.457012e-01 |        0
+      6       7.885144e+01       0.000000e+00 |        0
+K-means converged with 6 iterations (objv = 78.85144142614597)
 
 </pre>
 </div>
@@ -1778,17 +1772,13 @@ Su Mo Tu We Th Fr Sa
 </div>
 
 </div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="C-Function-Call:">C-Function Call:<a class="anchor-link" href="#C-Function-Call:">&#182;</a></h4>
-</div>
-
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[2]:
+In&nbsp;[113]:
 </div>
 <div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">ccall</span><span class="p">(:</span><span class="n">clock</span><span class="p">,</span><span class="n">Int32</span><span class="p">,())</span>
+<div class="highlight"><pre><span class="n">km</span><span class="o">.</span><span class="n">centers</span>
 </pre></div>
 
 </div>
@@ -1799,44 +1789,16 @@ In&nbsp;[2]:
 
 
 <div class="hbox output_area"><div class="prompt output_prompt">
-    Out[2]:</div>
+    Out[113]:</div>
 <div class="box-flex1 output_subarea output_pyout">
 
 
 <pre>
-6290918
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[3]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">bytestring</span><span class="p">(</span><span class="n">ccall</span><span class="p">(:</span><span class="n">ctime</span><span class="p">,</span> <span class="n">Ptr</span><span class="p">{</span><span class="n">Uint8</span><span class="p">},</span> <span class="p">()))</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[3]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-&quot;Fri Nov 26 18:10:08 2106\n&quot;
+4x3 Array{Float64,2}:
+ 5.90161  5.006  6.85   
+ 2.74839  3.428  3.07368
+ 4.39355  1.462  5.74211
+ 1.43387  0.246  2.07105
 </pre>
 
 </div>
@@ -1847,16 +1809,63 @@ In&nbsp;[3]:
 
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Adding-Package:">Adding Package:<a class="anchor-link" href="#Adding-Package:">&#182;</a></h4>
+<h2 id="SVM">SVM<a class="anchor-link" href="#SVM">&#182;</a></h2>
 </div>
 
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[5]:
+In&nbsp;[114]:
 </div>
 <div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">Pkg</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="s">&quot;Calendar&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span class="n">Y</span> <span class="o">=</span> <span class="p">[</span><span class="n">species</span> <span class="o">==</span> <span class="s">&quot;setosa&quot;</span> <span class="err">?</span> <span class="mf">1.0</span> <span class="p">:</span> <span class="o">-</span><span class="mf">1.0</span> <span class="k">for</span> <span class="n">species</span> <span class="ow">in</span> <span class="n">iris</span><span class="p">[:,</span> <span class="s">&quot;Species&quot;</span><span class="p">]];</span>
+<span class="n">X</span><span class="o">=</span><span class="n">features</span><span class="s">&#39;</span>
+<span class="n">model</span><span class="o">=</span><span class="n">SVM</span><span class="o">.</span><span class="n">svm</span><span class="p">(</span><span class="n">X</span><span class="p">[:,</span><span class="n">train</span><span class="p">],</span><span class="n">Y</span><span class="p">[</span><span class="n">train</span><span class="p">])</span>
+<span class="n">prediction</span><span class="o">=</span><span class="n">SVM</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X</span><span class="p">[:,</span><span class="n">test</span><span class="p">])</span>
+<span class="n">DecisionTree</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">prediction</span><span class="p">,</span><span class="n">Y</span><span class="p">[</span><span class="n">test</span><span class="p">])</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt output_prompt">
+    Out[114]:</div>
+<div class="box-flex1 output_subarea output_pyout">
+
+
+<pre>
+Classes:  [-1.0,1.0]
+Matrix:   2x2 Array{Int64,2}:
+ 50   0
+  0  22
+Accuracy: 1.0
+Kappa:    1.0
+</pre>
+
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Random-Forest">Random Forest<a class="anchor-link" href="#Random-Forest">&#182;</a></h2>
+</div>
+
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[114]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="n">modelrf</span><span class="o">=</span><span class="n">DecisionTree</span><span class="o">.</span><span class="n">build_forest</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">train</span><span class="p">],</span><span class="n">features</span><span class="p">[</span><span class="n">train</span><span class="p">,:],</span><span class="mi">4</span><span class="p">,</span><span class="mi">30</span><span class="p">);</span>
+<span class="n">predrf</span><span class="o">=</span><span class="n">DecisionTree</span><span class="o">.</span><span class="n">apply_forest</span><span class="p">(</span><span class="n">modelrf</span><span class="p">,</span><span class="n">features</span><span class="p">[</span><span class="n">test</span><span class="p">,:]);</span>
+<span class="n">println</span><span class="p">(</span><span class="n">DecisionTree</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">test</span><span class="p">],</span><span class="n">predrf</span><span class="p">));</span>
 </pre></div>
 
 </div>
@@ -1867,9 +1876,15 @@ In&nbsp;[5]:
 
 
 <div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stderr">
+<div class="box-flex1 output_subarea output_stream output_stdout">
 <pre>
-INFO: Nothing to be done.
+Classes:  {&quot;setosa&quot;,&quot;versicolor&quot;,&quot;virginica&quot;}
+Matrix:   3x3 Array{Int64,2}:
+ 22   0   0
+  1  24   2
+  0   3  20
+Accuracy: 0.9166666666666666
+Kappa:    0.8745280278826603
 
 </pre>
 </div>
@@ -1882,11 +1897,10 @@ INFO: Nothing to be done.
 <div class="cell border-box-sizing code_cell vbox">
 <div class="input hbox">
 <div class="prompt input_prompt">
-In&nbsp;[6]:
+In&nbsp;[114]:
 </div>
 <div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">using</span> <span class="n">Calendar</span>
-<span class="n">Calendar</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+<div class="highlight"><pre><span class="n">accuracyrf</span> <span class="o">=</span> <span class="n">DecisionTree</span><span class="o">.</span><span class="n">nfoldCV_forest</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
 </pre></div>
 
 </div>
@@ -1896,47 +1910,40 @@ In&nbsp;[6]:
 <div class="output vbox">
 
 
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[6]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
 <pre>
-16 Feb 2014 12:12:22 GMT
+
+Fold 1
+Classes:  {&quot;setosa&quot;,&quot;versicolor&quot;,&quot;virginica&quot;}
+Matrix:   3x3 Array{Int64,2}:
+ 17   0   0
+  0  15   0
+  0   1  17
+Accuracy: 0.98
+Kappa:    0.96996996996997
+
+Fold 2
+Classes:  {&quot;setosa&quot;,&quot;versicolor&quot;,&quot;virginica&quot;}
+Matrix:   3x3 Array{Int64,2}:
+ 16   0   0
+  0  16   1
+  0   3  14
+Accuracy: 0.92
+Kappa:    0.879951980792317
+
+Fold 3
+Classes:  {&quot;setosa&quot;,&quot;versicolor&quot;,&quot;virginica&quot;}
+Matrix:   3x3 Array{Int64,2}:
+ 17   0   0
+  0  16   2
+  0   1  14
+Accuracy: 0.94
+Kappa:    0.9099099099099098
+
+Mean Accuracy: 0.9466666666666667
+
 </pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[7]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">Calendar</span><span class="o">.</span><span class="n">dayofyear</span><span class="p">(</span><span class="n">Calendar</span><span class="o">.</span><span class="n">now</span><span class="p">())</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[7]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-47
-</pre>
-
 </div>
 </div>
 
@@ -1945,7 +1952,203 @@ In&nbsp;[7]:
 
 </div>
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Variables,-Vectors,-and-Matrices">Variables, Vectors, and Matrices<a class="anchor-link" href="#Variables,-Vectors,-and-Matrices">&#182;</a></h2>
+<h2 id="Adaptive-Boosted-Tree-(Adaboost)">Adaptive-Boosted Tree (Adaboost)<a class="anchor-link" href="#Adaptive-Boosted-Tree-(Adaboost)">&#182;</a></h2>
+</div>
+
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[114]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="n">modelad</span><span class="p">,</span><span class="n">coeffs</span><span class="o">=</span><span class="n">DecisionTree</span><span class="o">.</span><span class="n">build_adaboost_stumps</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">train</span><span class="p">],</span><span class="n">features</span><span class="p">[</span><span class="n">train</span><span class="p">,:],</span><span class="mi">50</span><span class="p">);</span>
+<span class="n">predad</span><span class="o">=</span><span class="n">DecisionTree</span><span class="o">.</span><span class="n">apply_forest</span><span class="p">(</span><span class="n">modelad</span><span class="p">,</span><span class="n">features</span><span class="p">[</span><span class="n">test</span><span class="p">,:]);</span>
+<span class="n">println</span><span class="p">(</span><span class="n">DecisionTree</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">test</span><span class="p">],</span><span class="n">predad</span><span class="p">));</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+Classes:  {&quot;setosa&quot;,&quot;versicolor&quot;,&quot;virginica&quot;}
+Matrix:   3x3 Array{Int64,2}:
+ 22  0   0
+  1  8  18
+  0  0  23
+Accuracy: 0.7361111111111112
+Kappa:    0.6112531969309464
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[114]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="n">accuracyad</span> <span class="o">=</span> <span class="n">DecisionTree</span><span class="o">.</span><span class="n">nfoldCV_stumps</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+
+Fold 1
+Classes:  {&quot;setosa&quot;,&quot;versicolor&quot;,&quot;virginica&quot;}
+Matrix:   3x3 Array{Int64,2}:
+ 0  22   0
+ 0  18   0
+ 0   0  10
+Accuracy: 0.56
+Kappa:    0.34523809523809534
+
+Fold 2
+Classes:  {&quot;setosa&quot;,&quot;versicolor&quot;,&quot;virginica&quot;}
+Matrix:   3x3 Array{Int64,2}:
+ 13  0   0
+  0  5  13
+  0  0  19
+Accuracy: 0.74
+Kappa:    0.6019595835884874
+
+Fold 3
+Classes:  {&quot;setosa&quot;,&quot;versicolor&quot;,&quot;virginica&quot;}
+Matrix:   3x3 Array{Int64,2}:
+ 15   0   0
+  0  10   4
+  0   1  20
+Accuracy: 0.9
+Kappa:    0.8453927025355595
+
+Mean Accuracy: 0.7333333333333334
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Pruned-Tree">Pruned Tree<a class="anchor-link" href="#Pruned-Tree">&#182;</a></h2>
+</div>
+
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[114]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="n">modelpt</span><span class="o">=</span><span class="n">DecisionTree</span><span class="o">.</span><span class="n">build_tree</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">train</span><span class="p">],</span><span class="n">features</span><span class="p">[</span><span class="n">train</span><span class="p">,:])</span>
+<span class="n">predpt</span><span class="o">=</span><span class="n">DecisionTree</span><span class="o">.</span><span class="n">apply_tree</span><span class="p">(</span><span class="n">modelpt</span><span class="p">,</span><span class="n">features</span><span class="p">[</span><span class="n">test</span><span class="p">,:]);</span>
+<span class="n">println</span><span class="p">(</span><span class="n">DecisionTree</span><span class="o">.</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">test</span><span class="p">],</span><span class="n">predpt</span><span class="p">));</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+Classes:  {&quot;setosa&quot;,&quot;versicolor&quot;,&quot;virginica&quot;}
+Matrix:   3x3 Array{Int64,2}:
+ 22   0   0
+  1  25   1
+  0   3  20
+Accuracy: 0.9305555555555556
+Kappa:    0.8953184065135215
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell vbox">
+<div class="input hbox">
+<div class="prompt input_prompt">
+In&nbsp;[114]:
+</div>
+<div class="input_area box-flex1">
+<div class="highlight"><pre><span class="n">accuracypt</span> <span class="o">=</span> <span class="n">DecisionTree</span><span class="o">.</span><span class="n">nfoldCV_tree</span><span class="p">(</span><span class="n">labels</span><span class="p">,</span> <span class="n">features</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">,</span> <span class="mi">3</span><span class="p">);</span>
+</pre></div>
+
+</div>
+</div>
+
+<div class="vbox output_wrapper">
+<div class="output vbox">
+
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+
+Fold 1
+Classes:  {&quot;setosa&quot;,&quot;versicolor&quot;,&quot;virginica&quot;}
+Matrix:   3x3 Array{Int64,2}:
+ 20   0   0
+  0  14   1
+  0   0  15
+Accuracy: 0.98
+Kappa:    0.9696969696969696
+
+Fold 2
+Classes:  {&quot;setosa&quot;,&quot;versicolor&quot;,&quot;virginica&quot;}
+Matrix:   3x3 Array{Int64,2}:
+ 15   0   0
+  0  15   0
+  0   1  19
+Accuracy: 0.98
+Kappa:    0.9697885196374622
+
+Fold 3
+Classes:  {&quot;setosa&quot;,&quot;versicolor&quot;,&quot;virginica&quot;}
+Matrix:   3x3 Array{Int64,2}:
+ 15   0   0
+  3  15   2
+  0   1  14
+Accuracy: 0.88
+Kappa:    0.8203592814371259
+
+Mean Accuracy: 0.9466666666666667
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Neural-Network">Neural Network<a class="anchor-link" href="#Neural-Network">&#182;</a></h2>
 </div>
 
 <div class="cell border-box-sizing code_cell vbox">
@@ -1954,7 +2157,318 @@ In&nbsp;[7]:
 In&nbsp;[8]:
 </div>
 <div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">x</span><span class="o">=</span><span class="mi">3</span>
+<div class="highlight"><pre><span class="c"># https://github.com/nwenzel/Julia_Neural_Network</span>
+<span class="c"># Code by Nathan Wenzel</span>
+
+<span class="n">function</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+  <span class="c"># sigmoid is a basic sigmoid function returning values from 0-1</span>
+  <span class="mf">1.</span> <span class="o">/</span> <span class="p">(</span> <span class="mf">1.</span> <span class="o">+</span> <span class="mi">1</span><span class="n">e</span><span class="o">.^</span><span class="p">(</span><span class="o">-</span><span class="n">z</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">end</span>
+
+<span class="n">function</span> <span class="n">sigmoidGradient</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+  <span class="n">sigmoid</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="o">.*</span> <span class="p">(</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">z</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">end</span>
+
+<span class="n">function</span> <span class="n">initialize_theta</span><span class="p">(</span><span class="n">input_unit_count</span><span class="p">,</span> <span class="n">output_class_count</span><span class="p">,</span> <span class="n">hidden_unit_length_list</span><span class="p">)</span>
+  <span class="c">#</span>
+  <span class="c">#initialize_theta creates architecture of neural network</span>
+  <span class="c">#    </span>
+  <span class="c">#Parameters:</span>
+  <span class="c">#  hidden_unit_length_list - Array of hidden layer units</span>
+  <span class="c">#  input_unit_count - integer, number of input units (features)</span>
+  <span class="c">#  output_class_count - integer, number of output classes</span>
+  <span class="c">#</span>
+  <span class="c">#Returns:</span>
+  <span class="c">#  </span>
+  <span class="c">#Array of theta arrays randomly initialized to from -.5 to .5</span>
+  <span class="c">#</span>
+  
+  <span class="k">if</span> <span class="n">length</span><span class="p">(</span> <span class="n">hidden_unit_length_list</span> <span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+    <span class="n">hidden_unit_length_list</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+  <span class="n">end</span>
+  
+  <span class="n">unit_count_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">input_unit_count</span><span class="p">]</span>
+  <span class="n">unit_count_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">unit_count_list</span><span class="p">,</span> <span class="n">hidden_unit_length_list</span><span class="p">]</span>
+  <span class="n">unit_count_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">unit_count_list</span><span class="p">,</span> <span class="n">output_class_count</span><span class="p">]</span>
+  <span class="n">layers</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">unit_count_list</span><span class="p">)</span>
+  
+  <span class="n">Theta_L</span> <span class="o">=</span> <span class="p">[</span> <span class="n">rand</span><span class="p">(</span> <span class="n">unit_count_list</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">unit_count_list</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span> <span class="p">)</span> <span class="o">-</span> <span class="o">.</span><span class="mi">5</span> <span class="k">for</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">:</span><span class="n">layers</span><span class="p">]</span>
+
+<span class="n">end</span>
+
+<span class="n">function</span> <span class="n">print_theta</span><span class="p">(</span><span class="n">Theta_L</span><span class="p">)</span>
+  <span class="c"># print_theta() is a helper function that prints Theta_L and architecture info</span>
+  <span class="c"># It does not actually &quot;do&quot; anything except print to stdout</span>
+
+  <span class="n">T</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">Theta_L</span><span class="p">)</span>
+
+  <span class="n">println</span><span class="p">()</span>
+  <span class="n">println</span><span class="p">(</span> <span class="s">&quot;NN ARCHITECTURE&quot;</span> <span class="p">)</span>
+  <span class="n">println</span><span class="p">(</span> <span class="s">&quot;$(T+1) Layers ($(T-1) Hidden)&quot;</span> <span class="p">)</span>
+  <span class="n">println</span><span class="p">(</span> <span class="s">&quot;$T Thetas&quot;</span> <span class="p">)</span>
+  <span class="n">println</span><span class="p">(</span> <span class="s">&quot;$(size(Theta_L[1],2)-1) Input Features&quot;</span> <span class="p">)</span>
+  <span class="n">println</span><span class="p">(</span> <span class="s">&quot;$(size(Theta_L[end], 1)) Output Classes&quot;</span> <span class="p">)</span>
+  <span class="n">println</span><span class="p">()</span>
+    
+  <span class="n">println</span><span class="p">(</span> <span class="s">&quot;Units per layer (excl. bias unit)&quot;</span> <span class="p">)</span>
+  <span class="k">for</span> <span class="n">t</span> <span class="o">=</span> <span class="mi">1</span><span class="p">:</span><span class="n">T</span>
+    <span class="k">if</span> <span class="n">t</span> <span class="o">==</span> <span class="mi">1</span>
+      <span class="n">println</span><span class="p">(</span> <span class="s">&quot; - Input: $(size(Theta_L[t],2)-1) Units&quot;</span> <span class="p">)</span>
+    <span class="n">end</span>
+    <span class="k">if</span> <span class="n">t</span> <span class="o">&lt;</span> <span class="n">T</span>
+      <span class="n">println</span><span class="p">(</span> <span class="s">&quot; - Hidden $t: $(size(Theta_L[t],1)) Units&quot;</span> <span class="p">)</span>
+    <span class="k">else</span>
+      <span class="n">println</span><span class="p">(</span> <span class="s">&quot; - Output: $(size(Theta_L[t],1)) Units&quot;</span> <span class="p">)</span>
+    <span class="n">end</span>
+  <span class="n">end</span>
+  <span class="n">println</span><span class="p">()</span>
+
+  <span class="n">println</span><span class="p">(</span> <span class="s">&quot;Theta Shapes&quot;</span> <span class="p">)</span>
+  <span class="k">for</span> <span class="n">l</span> <span class="o">=</span> <span class="mi">1</span><span class="p">:</span><span class="n">T</span>
+    <span class="n">println</span><span class="p">(</span> <span class="s">&quot;Theta $l: $(size(Theta_L[l]))&quot;</span> <span class="p">)</span>
+  <span class="n">end</span>
+  <span class="n">println</span><span class="p">()</span>
+  
+  <span class="n">println</span><span class="p">(</span> <span class="s">&quot;Theta Values&quot;</span> <span class="p">)</span>
+  <span class="k">for</span> <span class="n">t</span><span class="o">=</span> <span class="mi">1</span><span class="p">:</span><span class="n">T</span>
+    <span class="n">println</span><span class="p">(</span> <span class="s">&quot;Theta $t:&quot;</span>  <span class="p">)</span>
+    <span class="n">println</span> <span class="p">(</span> <span class="n">Theta_L</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+  <span class="n">end</span>
+  <span class="n">println</span><span class="p">()</span>
+
+<span class="n">end</span>
+
+<span class="n">function</span> <span class="n">nn_cost</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span> <span class="n">Y_pred</span><span class="p">)</span>
+  <span class="c">#</span>
+  <span class="c"># nn_cost implements cost function for array inputs Y and Y_pred</span>
+  <span class="c">#  </span>
+  <span class="c"># y is array of n_observations by n_classes</span>
+  <span class="c"># Y_pred is array with same dimensions as Y of predicted y values</span>
+  <span class="c">#</span>
+  <span class="k">if</span> <span class="n">size</span><span class="p">(</span><span class="n">Y</span><span class="p">)</span> <span class="o">!=</span> <span class="n">size</span><span class="p">(</span><span class="n">Y_pred</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">size</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">!=</span> <span class="n">size</span><span class="p">(</span><span class="n">Y_pred</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+      <span class="n">error</span><span class="p">(</span><span class="s">&quot;Wrong number of predictions&quot;</span><span class="p">,</span> <span class="s">&quot;$(size(Y,1)) Actual Values. $(size(Y_pred,1)) Predicted Values. &quot;</span><span class="p">)</span>
+    <span class="k">else</span>
+      <span class="n">error</span><span class="p">(</span><span class="s">&quot;Wrong number of prediction classes&quot;</span><span class="p">,</span> <span class="s">&quot;$(size(Y,2)) Actual Classes. $(size(Y_pred,2)) Predicted Classes. &quot;</span><span class="p">)</span>
+    <span class="n">end</span>
+  <span class="n">end</span>
+    
+  <span class="n">n_observations</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">Y</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+  
+  <span class="c"># Cost Function</span>
+  <span class="n">J</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span> <span class="o">/</span> <span class="n">n_observations</span> <span class="p">)</span> <span class="o">*</span> <span class="nb">sum</span><span class="p">((</span><span class="n">Y</span> <span class="o">.*</span> <span class="n">log</span><span class="p">(</span><span class="n">Y_pred</span><span class="p">))</span> <span class="o">+</span> <span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">Y</span><span class="p">)</span> <span class="o">.*</span> <span class="n">log</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">Y_pred</span><span class="p">)))</span>
+  
+  <span class="n">J</span>
+
+<span class="n">end</span>
+
+
+
+<span class="n">function</span> <span class="n">nn_predict</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Theta_L</span><span class="p">)</span>
+  <span class="c">#</span>
+  <span class="c"># nn_predict calculates activations for all layers given X and thetas in Theta_L</span>
+  <span class="c"># return all inputs and activations for all layers for use in backprop</span>
+  <span class="c">#</span>
+  <span class="c"># Parameters</span>
+  <span class="c">#  X is matrix of input features dimensions n_observations by n_features</span>
+  <span class="c">#  Theta_L is a 3D array where first element corresponds to the layer number, second is unit at layer+1, third is unit in layer</span>
+  <span class="c">#</span>
+  <span class="c"># Returns</span>
+  <span class="c">#  a_N - 1D Array of activation 2D arrays for each layer: Input (1), Hidden (2 to T), and Output (T+1)</span>
+  <span class="c">#  a_Z - 1D Array of input 2D arrays to compute activations for all non-bias units</span>
+  <span class="c">#  a_N[end] - 2D Array of predicted Y values with dimensions n_observations by n_classes</span>
+  <span class="c">#</span>
+
+  <span class="n">a_N</span> <span class="o">=</span> <span class="p">{}</span>
+  <span class="n">z_N</span> <span class="o">=</span> <span class="p">{}</span>
+
+  <span class="n">m</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">T</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">Theta_L</span><span class="p">)</span>
+    
+  <span class="c"># Input Layer inputs</span>
+  <span class="n">push</span><span class="err">!</span><span class="p">(</span><span class="n">a_N</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span> 			<span class="c"># List of activations including bias unit for non-output layers</span>
+  <span class="n">push</span><span class="err">!</span><span class="p">(</span><span class="n">z_N</span><span class="p">,</span> <span class="n">zeros</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span> 	<span class="c"># add filler Z layer to align keys/indexes for a, z, and Theta</span>
+
+  <span class="c"># Loop through each Theta_List theta</span>
+  <span class="c"># t is index of Theta for calculating layer t+1 from layer t</span>
+  <span class="k">for</span> <span class="n">t</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">T</span>
+    <span class="c"># Reshape 1D Array into 2D Array</span>
+    <span class="k">if</span> <span class="n">ndims</span><span class="p">(</span><span class="n">a_N</span><span class="p">[</span><span class="n">t</span><span class="p">])</span> <span class="o">==</span> <span class="mi">1</span>
+      <span class="n">a_N</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">reshape</span><span class="p">(</span><span class="n">a_N</span><span class="p">[</span><span class="n">t</span><span class="p">],</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="p">(</span><span class="n">a_N</span><span class="p">[</span><span class="n">t</span><span class="p">],</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">end</span>
+
+    <span class="c"># Add bias unit</span>
+    <span class="n">a_N</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span> <span class="n">ones</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">a_N</span><span class="p">[</span><span class="n">t</span><span class="p">],</span><span class="mi">1</span><span class="p">),</span> <span class="mi">1</span><span class="p">)</span>  <span class="n">a_N</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="p">]</span>
+      
+    <span class="c"># Calculate and Append new z and a arrays to z_N and a_N lists</span>
+    <span class="n">push</span><span class="err">!</span><span class="p">(</span><span class="n">z_N</span><span class="p">,</span> <span class="n">a_N</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="n">Theta_L</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="s">&#39;) #&#39;</span>
+    <span class="n">push</span><span class="err">!</span><span class="p">(</span><span class="n">a_N</span><span class="p">,</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">z_N</span><span class="p">[</span><span class="n">t</span><span class="o">+</span><span class="mi">1</span><span class="p">]))</span>
+  <span class="n">end</span>
+  
+  <span class="n">z_N</span><span class="p">,</span> <span class="n">a_N</span><span class="p">,</span> <span class="n">a_N</span><span class="p">[</span><span class="n">end</span><span class="p">]</span>
+
+<span class="n">end</span>
+
+
+<span class="n">function</span> <span class="n">back_prop</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">Theta_L</span><span class="p">,</span> <span class="n">lmda</span><span class="p">)</span>
+  <span class="c">#</span>
+  <span class="c"># Parameters</span>
+  <span class="c">#  X_train - Array of feature inputs with dimensions n_observations by n_features</span>
+  <span class="c">#  Y_train - Array of class outputs with dimensions n_observations by n_classes</span>
+  <span class="c">#  Theta_L is a 1D array of Theta values where 1D element is the layer number, the 2D elements are unit in layer+1 and unit in layer</span>
+  <span class="c">#  lmda - Float64 - lambda term for regularization</span>
+  <span class="c">#  </span>
+  <span class="c"># Returns</span>
+  <span class="c">#  Y_pred as array of predicted Y values from nn_predict()</span>
+  <span class="c">#  Theta_Gradient_L as 1D array of 2D Theta Gradient arrays</span>
+  <span class="c">#</span>
+
+  <span class="n">n_observations</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+  
+  <span class="n">T</span> <span class="o">=</span> <span class="n">length</span><span class="p">(</span><span class="n">Theta_L</span><span class="p">)</span>
+
+  <span class="c"># Create Modified copy of the Theta_L for Regularization with Coefficient for bias unit set to 0 so that bias unit is not regularized</span>
+  <span class="c"># Create variable to accumulate error caused by each Theta_L term in layer a_N[n+1]</span>
+  <span class="n">Theta_Gradient_L</span> <span class="o">=</span> <span class="p">{}</span>
+  <span class="n">regTheta</span> <span class="o">=</span> <span class="p">{}</span>
+  <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">T</span>
+    <span class="n">push</span><span class="err">!</span><span class="p">(</span><span class="n">regTheta</span><span class="p">,</span> <span class="p">[</span><span class="n">zeros</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">Theta_L</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="mi">1</span><span class="p">),</span><span class="mi">1</span><span class="p">)</span> <span class="n">Theta_L</span><span class="p">[</span><span class="n">i</span><span class="p">][:,</span><span class="mi">2</span><span class="p">:]])</span>
+    <span class="n">push</span><span class="err">!</span><span class="p">(</span><span class="n">Theta_Gradient_L</span><span class="p">,</span> <span class="n">zeros</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">Theta_L</span><span class="p">[</span><span class="n">i</span><span class="p">])))</span>
+  <span class="n">end</span>
+
+
+  <span class="c"># Forward Pass</span>
+  <span class="n">z_N</span><span class="p">,</span> <span class="n">a_N</span><span class="p">,</span> <span class="n">Y_pred</span> <span class="o">=</span> <span class="n">nn_predict</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Theta_L</span><span class="p">)</span>
+
+  <span class="c"># Backprop Error Accumulator</span>
+  <span class="n">delta_N</span> <span class="o">=</span> <span class="p">{}</span>
+  <span class="k">for</span> <span class="n">t</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">T</span>
+    <span class="n">push</span><span class="err">!</span><span class="p">(</span><span class="n">delta_N</span><span class="p">,</span> <span class="p">{})</span>
+  <span class="n">end</span>
+    
+  <span class="c"># Error for Output layer is predicted value - Y training value</span>
+  <span class="n">delta</span> <span class="o">=</span> <span class="n">Y_pred</span> <span class="o">-</span> <span class="n">Y_train</span>
+  <span class="k">if</span> <span class="n">ndims</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="n">reshape</span><span class="p">(</span><span class="n">delta</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">length</span><span class="p">(</span><span class="n">delta</span><span class="p">)</span> <span class="p">)</span>
+  <span class="n">end</span>
+
+  <span class="c"># Loop backwards through Thetas to apply Error to prior Layer (except input layer)</span>
+  <span class="c"># Finish at T-2 because start at 0, output layer is done outside, the loop and input has no error</span>
+
+  <span class="c"># Output Error</span>
+  <span class="n">delta_N</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="n">delta</span>
+
+  <span class="c"># Hidden Layers Error    </span>
+  <span class="k">for</span> <span class="n">t</span><span class="o">=</span><span class="mi">0</span><span class="p">:</span><span class="n">T</span><span class="o">-</span><span class="mi">2</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="p">(</span><span class="n">delta</span> <span class="o">*</span> <span class="n">Theta_L</span><span class="p">[</span><span class="n">T</span><span class="o">-</span><span class="n">t</span><span class="p">][:,</span><span class="mi">2</span><span class="p">:])</span> <span class="o">.*</span> <span class="n">sigmoidGradient</span><span class="p">(</span><span class="n">z_N</span><span class="p">[</span><span class="n">T</span><span class="o">-</span><span class="n">t</span><span class="p">])</span>
+    <span class="n">delta_N</span><span class="p">[</span><span class="n">T</span><span class="o">-</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">delta</span>
+  <span class="n">end</span>
+    
+  <span class="c"># Calculate error gradients (no error in input layer)</span>
+  <span class="c"># t is the Theta from layer t to layer t+1</span>
+  <span class="k">for</span> <span class="n">t</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">T</span>
+    <span class="n">Theta_Gradient_L</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">Theta_Gradient_L</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">+</span> <span class="n">delta_N</span><span class="p">[</span><span class="n">t</span><span class="p">]</span><span class="s">&#39; * a_N[t] #&#39;</span>
+  <span class="n">end</span>
+
+  <span class="c"># Average Error + regularization penalty  </span>
+  <span class="k">for</span> <span class="n">t</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">T</span>
+    <span class="n">Theta_Gradient_L</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">Theta_Gradient_L</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.0</span><span class="o">/</span><span class="n">n_observations</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="n">lmda</span> <span class="o">*</span> <span class="n">regTheta</span><span class="p">[</span><span class="n">t</span><span class="p">])</span>
+  <span class="n">end</span>
+  
+  <span class="n">Y_pred</span><span class="p">,</span> <span class="n">Theta_Gradient_L</span>
+
+<span class="n">end</span>
+
+
+
+<span class="n">function</span> <span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">Theta_L</span><span class="p">,</span> <span class="n">lmda</span><span class="p">,</span> <span class="n">epochs</span><span class="p">)</span>
+  <span class="c">#</span>
+  <span class="c">#fit() calls the training back_prop function for the given number of cycles</span>
+  <span class="c">#tracks error and error improvement rates</span>
+  <span class="c">#  </span>
+  <span class="c">#Parameters:</span>
+  <span class="c">#  X_train - Array of training data with dimension n_observations by n_features</span>
+  <span class="c">#  Y_train - Array of training classes with dimension n_observations by n_classes</span>
+  <span class="c">#  Theta_L - 1D array of theta 2d arrays where each theta has dimensions n_units[layer+1] by n_units[layer]+1</span>
+  <span class="c">#  epochs -  integer of number of times to update Theta_L</span>
+  <span class="c">#  </span>
+  <span class="c">#Returns</span>
+  <span class="c">#  Theta_L - 1D array of Theta arrays</span>
+  <span class="c">#  J_List - Array (length = epochs) of result of cost function for each iteration</span>
+
+  <span class="n">J_list</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span> <span class="n">epochs</span> <span class="p">)</span>
+
+  <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">epochs</span>
+    <span class="c"># Back prop to get Y_pred and Theta gradient</span>
+    <span class="n">Y_pred</span><span class="p">,</span> <span class="n">Theta_grad</span> <span class="o">=</span> <span class="n">back_prop</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">Theta_L</span><span class="p">,</span> <span class="n">lmda</span><span class="p">)</span>
+    <span class="c"># Record cost</span>
+    <span class="n">J_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">nn_cost</span><span class="p">(</span><span class="n">Y_train</span><span class="p">,</span> <span class="n">Y_pred</span><span class="p">)</span>
+    <span class="c"># Update Theta using Learning Rate * Theta Gradient</span>
+    <span class="k">for</span> <span class="n">t</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">length</span><span class="p">(</span><span class="n">Theta_L</span><span class="p">)</span>
+      <span class="c"># Start with a large learning rate; need to update this to be more intelligent than simply looking at iteration count</span>
+      <span class="c"># Need to update to change learning rate based on progress of cost function</span>
+      <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">100</span>
+        <span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">5.0</span>        
+      <span class="k">else</span>
+        <span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">1.0</span>
+      <span class="n">end</span>
+      <span class="n">Theta_L</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">=</span> <span class="n">Theta_L</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="o">-</span> <span class="p">(</span> <span class="n">learning_rate</span> <span class="o">*</span> <span class="n">Theta_grad</span><span class="p">[</span><span class="n">t</span><span class="p">]</span> <span class="p">)</span>
+    <span class="n">end</span>
+    <span class="c">#println(&quot;Cost $i: $(J_list[i])&quot;)</span>
+  <span class="n">end</span>
+
+  <span class="n">Theta_L</span><span class="p">,</span> <span class="n">J_list</span>
+
+<span class="n">end</span>
+
+
+<span class="n">function</span> <span class="n">XOR_test</span><span class="p">(</span><span class="n">hidden_unit_length_list</span><span class="p">,</span> <span class="n">epochs</span><span class="p">)</span>
+  <span class="c">#</span>
+  <span class="c">#XOR_test is a simple test of the nn printing the predicted value to std out</span>
+  <span class="c">#Trains on a sample XOR data set</span>
+  <span class="c">#Predicts a single value</span>
+  <span class="c">#Accepts an option parameter to set architecture of hidden layers</span>
+  <span class="c">#</span>
+  
+  
+  <span class="n">println</span><span class="p">(</span> <span class="s">&quot;Training Data: X &amp; Y&quot;</span><span class="p">)</span>
+
+  <span class="c"># Training Data</span>
+  <span class="n">X_train</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">1</span><span class="p">;</span> <span class="mi">1</span> <span class="mi">0</span><span class="p">;</span> <span class="mi">0</span> <span class="mi">1</span><span class="p">;</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">]</span>	<span class="c"># Training Input Data</span>
+  <span class="n">Y_train</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span><span class="p">;</span> <span class="mi">1</span> <span class="mi">0</span><span class="p">;</span> <span class="mi">1</span> <span class="mi">0</span><span class="p">;</span> <span class="mi">0</span> <span class="mi">1</span><span class="p">]</span> 			<span class="c"># Training Classes</span>
+  <span class="n">println</span><span class="p">(</span> <span class="n">X_train</span> <span class="p">)</span>
+  <span class="n">println</span><span class="p">(</span> <span class="n">Y_train</span> <span class="p">)</span>
+  
+  <span class="c"># Hidden layer architecture</span>
+  <span class="n">hidden_layer_architecture</span> <span class="o">=</span> <span class="n">hidden_unit_length_list</span>
+
+  <span class="c"># Regularization Term</span>
+  <span class="n">lmda</span> <span class="o">=</span> <span class="mf">1e-5</span>
+
+  <span class="c"># Initialize Theta based on selected architecture</span>
+  <span class="n">Theta_L</span> <span class="o">=</span> <span class="n">initialize_theta</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">size</span><span class="p">(</span><span class="n">Y_train</span><span class="p">,</span><span class="mi">2</span><span class="p">),</span> <span class="n">hidden_layer_architecture</span><span class="p">)</span>
+
+  
+  <span class="c"># Fit</span>
+  <span class="n">Theta_L</span><span class="p">,</span> <span class="n">J_list</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">Y_train</span><span class="p">,</span> <span class="n">Theta_L</span><span class="p">,</span> <span class="n">lmda</span><span class="p">,</span> <span class="n">epochs</span><span class="p">)</span>
+  
+  <span class="c"># Print Architecture</span>
+  <span class="n">print_theta</span><span class="p">(</span><span class="n">Theta_L</span><span class="p">)</span>
+  
+  <span class="c"># Print Cost</span>
+  <span class="n">println</span><span class="p">(</span><span class="s">&quot;Cost Function Applied to Training Data: $(J_list[end])&quot;</span><span class="p">)</span>
+
+  <span class="c"># Predict</span>
+  <span class="n">X_new</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="mi">0</span><span class="p">;</span><span class="mi">0</span> <span class="mi">1</span><span class="p">;</span><span class="mi">1</span> <span class="mi">1</span><span class="p">;</span><span class="mi">0</span> <span class="mi">0</span><span class="p">]</span>
+  <span class="n">println</span><span class="p">(</span> <span class="s">&quot;Given X:&quot;</span><span class="p">)</span>
+  <span class="n">println</span><span class="p">(</span><span class="s">&quot;$X_new&quot;</span><span class="p">)</span>
+  <span class="n">z_N</span><span class="p">,</span> <span class="n">a_N</span><span class="p">,</span> <span class="n">Y_pred</span> <span class="o">=</span> <span class="n">nn_predict</span><span class="p">(</span><span class="n">X_new</span><span class="p">,</span> <span class="n">Theta_L</span><span class="p">)</span>
+  <span class="n">println</span><span class="p">(</span> <span class="s">&quot;Predicted Y:&quot;</span><span class="p">)</span> 
+  <span class="n">println</span><span class="p">(</span><span class="s">&quot;$(round(Y_pred,3))&quot;</span><span class="p">)</span>
+
+  <span class="n">Y_pred</span>
+
+<span class="n">end</span>
 </pre></div>
 
 </div>
@@ -1970,171 +2484,9 @@ In&nbsp;[8]:
 
 
 <pre>
-3
+XOR_test (generic function with 1 method)
 </pre>
 
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[9]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="c"># column vector</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[9]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-3-element Array{Int64,1}:
- 1
- 2
- 3
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[10]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">x</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[10]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-2
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[11]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span> <span class="mi">4</span><span class="p">]</span> <span class="c"># row vector</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[11]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-1x4 Array{Int64,2}:
- 1  2  3  4
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[12]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">x</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[12]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-(1,2,3,4)
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[13]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span>
-<span class="n">println</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span><span class="s">&quot;,&quot;</span><span class="p">,</span><span class="n">x2</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
-<pre>
-1,2
-
-</pre>
 </div>
 </div>
 
@@ -2148,7 +2500,7 @@ In&nbsp;[13]:
 In&nbsp;[14]:
 </div>
 <div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">x1</span><span class="p">,</span><span class="n">x2</span><span class="o">=</span><span class="n">x2</span><span class="p">,</span><span class="n">x1</span> <span class="c">#swap x1,x2 values</span>
+<div class="highlight"><pre><span class="n">Y_pred</span> <span class="o">=</span> <span class="n">XOR_test</span><span class="p">([</span><span class="mi">2</span><span class="p">],</span> <span class="mi">5000</span><span class="p">)</span>
 </pre></div>
 
 </div>
@@ -2157,6 +2509,64 @@ In&nbsp;[14]:
 <div class="vbox output_wrapper">
 <div class="output vbox">
 
+
+<div class="hbox output_area"><div class="prompt"></div>
+<div class="box-flex1 output_subarea output_stream output_stdout">
+<pre>
+Training Data: X &amp; Y
+1	1
+1	0
+0	1
+0	0
+
+0	1
+1	0
+1	0
+0	1
+
+
+NN ARCHITECTURE
+3 Layers (1 Hidden)
+2 Thetas
+2 Input Features
+2 Output Classes
+
+Units per layer (excl. bias unit)
+ - Input: 2 Units
+ - Hidden 1: 2 Units
+ - Output: 2 Units
+
+Theta Shapes
+Theta 1: (2,3)
+Theta 2: (2,3)
+
+Theta Values
+Theta 1:
+-4.244057658582526	8.011119225793868	-8.218268440922987
+3.9453941972708795	8.156949365387408	-7.86130314531543
+
+Theta 2:
+5.735531100620542	12.358587250630872	-11.947865946940489
+-5.7395079853749005	-12.366440373984625	11.955769589062232
+
+
+Cost Function Applied to Training Data: 0.006301094016920786
+Given X:
+1	0
+0	1
+1	1
+0	0
+
+Predicted Y:
+.997	.003
+.996	.004
+.003	.997
+.003	.997
+
+
+</pre>
+</div>
+</div>
 
 <div class="hbox output_area"><div class="prompt output_prompt">
     Out[14]:</div>
@@ -2164,2148 +2574,11 @@ In&nbsp;[14]:
 
 
 <pre>
-(2,1)
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[15]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">x1</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[15]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-2
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[16]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">M</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span> <span class="mi">2</span> <span class="mi">3</span><span class="p">;</span><span class="mi">4</span> <span class="mi">5</span> <span class="mi">6</span><span class="p">;</span><span class="mi">7</span> <span class="mi">8</span> <span class="mi">9</span><span class="p">;</span><span class="mi">10</span> <span class="mi">11</span> <span class="mi">12</span><span class="p">]</span>  <span class="c"># matrix</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[16]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-4x3 Array{Int64,2}:
-  1   2   3
-  4   5   6
-  7   8   9
- 10  11  12
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[17]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">M</span><span class="o">=</span><span class="n">reshape</span><span class="p">(</span><span class="n">M</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[17]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-3x4 Array{Int64,2}:
- 1  10   8   6
- 4   2  11   9
- 7   5   3  12
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[18]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">M</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span> <span class="c"># first row</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[18]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-1x4 Array{Int64,2}:
- 1  10  8  6
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[19]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">M</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="c"># first column</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[19]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-3-element Array{Int64,1}:
- 1
- 4
- 7
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[20]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">M</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="c"># 3rd row, first to third column</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[20]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-1x3 Array{Int64,2}:
- 7  5  3
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[21]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="c"># column vector of random numbers</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[21]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-5-element Array{Float64,1}:
- 0.689187
- 0.481103
- 0.422456
- 0.332155
- 0.44626 
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[22]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span> <span class="c"># matrix of random numbers</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[22]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-5x5 Array{Float64,2}:
- 0.275435  0.174196  0.791267   0.0491136  0.76978 
- 0.460359  0.443341  0.0415981  0.512503   0.143485
- 0.641527  0.477086  0.783718   0.944992   0.418183
- 0.231538  0.884084  0.587011   0.988167   0.89029 
- 0.577792  0.76283   0.440785   0.436356   0.154204
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[23]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">eye</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>  <span class="c"># identity matrix</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[23]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-5x5 Array{Float64,2}:
- 1.0  0.0  0.0  0.0  0.0
- 0.0  1.0  0.0  0.0  0.0
- 0.0  0.0  1.0  0.0  0.0
- 0.0  0.0  0.0  1.0  0.0
- 0.0  0.0  0.0  0.0  1.0
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[24]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">a</span><span class="o">=</span><span class="n">zeros</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[24]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-5x5 Array{Float64,2}:
- 0.0  0.0  0.0  0.0  0.0
- 0.0  0.0  0.0  0.0  0.0
- 0.0  0.0  0.0  0.0  0.0
- 0.0  0.0  0.0  0.0  0.0
- 0.0  0.0  0.0  0.0  0.0
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[25]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">b</span><span class="o">=</span><span class="n">ones</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[25]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-5x5 Array{Float64,2}:
- 1.0  1.0  1.0  1.0  1.0
- 1.0  1.0  1.0  1.0  1.0
- 1.0  1.0  1.0  1.0  1.0
- 1.0  1.0  1.0  1.0  1.0
- 1.0  1.0  1.0  1.0  1.0
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[26]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">linspace</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">10</span><span class="p">)</span> 
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[26]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-10-element Array{Float64,1}:
- 1.0    
- 1.11111
- 1.22222
- 1.33333
- 1.44444
- 1.55556
- 1.66667
- 1.77778
- 1.88889
- 2.0    
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[27]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">A</span><span class="o">=</span><span class="n">diagm</span><span class="p">(</span><span class="n">ones</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[27]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-5x5 Array{Float64,2}:
- 1.0  0.0  0.0  0.0  0.0
- 0.0  1.0  0.0  0.0  0.0
- 0.0  0.0  1.0  0.0  0.0
- 0.0  0.0  0.0  1.0  0.0
- 0.0  0.0  0.0  0.0  1.0
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[28]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">diag</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[28]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-5-element Array{Float64,1}:
- 1.0
- 1.0
- 1.0
- 1.0
- 1.0
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[29]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="p">[</span><span class="n">sin</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span> <span class="c">#comprehension</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[29]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-5-element Array{Float64,1}:
-  0.841471
-  0.909297
-  0.14112 
- -0.756802
- -0.958924
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[30]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">V</span><span class="o">=</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">,</span> <span class="n">j</span><span class="o">=</span><span class="mi">4</span><span class="p">:</span><span class="mi">10</span><span class="p">]</span> 
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[30]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-3x7 Array{(Int64,Int64),2}:
- (1,4)  (1,5)  (1,6)  (1,7)  (1,8)  (1,9)  (1,10)
- (2,4)  (2,5)  (2,6)  (2,7)  (2,8)  (2,9)  (2,10)
- (3,4)  (3,5)  (3,6)  (3,7)  (3,8)  (3,9)  (3,10)
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[31]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">M</span><span class="o">=</span><span class="p">[</span><span class="n">sin</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="n">j</span><span class="o">=</span><span class="mi">4</span><span class="p">:</span><span class="mi">7</span><span class="p">]</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[31]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-5x4 Array{Float64,2}:
- -0.958924  -0.279415   0.656987   0.989358
- -0.279415   0.656987   0.989358   0.412118
-  0.656987   0.989358   0.412118  -0.544021
-  0.989358   0.412118  -0.544021  -0.99999 
-  0.412118  -0.544021  -0.99999   -0.536573
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[32]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">M</span> <span class="o">=</span> <span class="nd">@parallel</span> <span class="p">[</span><span class="n">sin</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="mi">5</span><span class="p">,</span><span class="n">j</span><span class="o">=</span><span class="mi">4</span><span class="p">:</span><span class="mi">7</span><span class="p">]</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[32]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-5x4 DArray{Float64,2,Array{Float64,2}}:
- -0.958924  -0.279415   0.656987   0.989358
- -0.279415   0.656987   0.989358   0.412118
-  0.656987   0.989358   0.412118  -0.544021
-  0.989358   0.412118  -0.544021  -0.99999 
-  0.412118  -0.544021  -0.99999   -0.536573
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Function-and-Operations">Function and Operations<a class="anchor-link" href="#Function-and-Operations">&#182;</a></h2>
-</div>
-
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[33]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">a</span><span class="o">=</span><span class="mi">3</span><span class="o">*</span><span class="mi">8</span><span class="p">;</span>
-<span class="n">b</span><span class="o">=</span><span class="mi">8</span><span class="o">/</span><span class="mi">4</span><span class="p">;</span>
-<span class="n">c</span><span class="o">=</span><span class="mi">4</span><span class="o">//</span><span class="mi">8</span><span class="p">;</span>
-<span class="n">d</span><span class="o">=</span><span class="mi">2</span><span class="o">^</span><span class="mi">8</span><span class="p">;</span>
-<span class="n">println</span><span class="p">(</span><span class="s">&quot;$a,$b,$c,$d&quot;</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
-<pre>
-24,2.0,1//2,256
-
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[34]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="mi">2</span><span class="o">^</span><span class="p">(</span><span class="mi">2</span><span class="o">+</span><span class="mi">3</span><span class="n">im</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[34]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
--1.947977671863125 + 3.493620327099486im
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[35]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">sin</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[35]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-0.8660254037844386
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[36]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">besselj</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[36]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-0.0465651162777522
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[37]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">=</span><span class="n">x</span><span class="o">*</span><span class="n">x</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[37]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-f (generic function with 1 method)
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[38]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">function</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">x</span><span class="o">*</span><span class="n">x</span>
-<span class="n">end</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[38]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-f (generic function with 1 method)
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[39]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">f</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[39]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-9
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[40]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">ff</span><span class="o">=</span><span class="n">function</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-  <span class="n">x</span><span class="o">*</span><span class="n">x</span>
-<span class="n">end</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[40]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-(anonymous function)
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[41]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">p</span><span class="o">=</span><span class="n">println</span>
-<span class="n">p</span><span class="p">(</span><span class="mi">34</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt"></div>
-<div class="box-flex1 output_subarea output_stream output_stdout">
-<pre>
-34
-
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[42]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">p</span><span class="o">=</span><span class="n">ff</span>
-<span class="n">p</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[42]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-16
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[43]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">fff</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">)</span><span class="o">=</span><span class="n">x</span><span class="o">*</span><span class="n">y</span><span class="o">*</span><span class="n">z</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[43]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-fff (generic function with 1 method)
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[44]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">fff</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[44]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-60
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[45]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="nb">map</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">,[</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[45]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-3-element Array{Int64,1}:
-  1
- 16
-  4
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[46]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="nb">map</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[46]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-10-element Array{Int64,1}:
-   1
-   4
-   9
-  16
-  25
-  36
-  49
-  64
-  81
- 100
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[47]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="nb">map</span><span class="p">(</span><span class="n">x</span><span class="o">-&gt;</span><span class="n">x</span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[47]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-10-element Array{Int64,1}:
-   1
-   4
-   9
-  16
-  25
-  36
-  49
-  64
-  81
- 100
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[48]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="nb">map</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">10</span><span class="p">)</span> <span class="n">do</span> <span class="n">x</span>
-<span class="n">y</span><span class="o">=</span><span class="n">x</span><span class="o">*</span><span class="n">x</span>
-<span class="n">end</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[48]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-10-element Array{Int64,1}:
-   1
-   4
-   9
-  16
-  25
-  36
-  49
-  64
-  81
- 100
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[49]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[49]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-3-element Array{Int64,1}:
- 1
- 2
- 3
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[50]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="mi">3</span><span class="n">x</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[50]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-3-element Array{Int64,1}:
- 3
- 6
- 9
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[51]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">x</span><span class="o">+</span><span class="mi">3</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[51]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-3-element Array{Int64,1}:
- 4
- 5
- 6
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[52]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[52]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-3-element Array{Int64,1}:
- 2
- 4
- 6
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[53]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">x</span><span class="s">&#39; * y   # dot product</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[53]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-1-element Array{Int64,1}:
- 28
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[54]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">dot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> <span class="c"># dot product</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[54]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-28
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[55]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="nb">sum</span><span class="p">(</span><span class="n">conj</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.*</span> <span class="n">y</span><span class="p">)</span>  <span class="c"># dot product</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[55]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-28
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[56]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">x</span> <span class="o">.*</span> <span class="n">y</span>  <span class="c"># elementwise multiplication</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[56]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-3-element Array{Int64,1}:
-  2
-  8
- 18
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[57]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">cos</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> 
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[57]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-3-element Array{Float64,1}:
-  0.540302
- -0.416147
- -0.989992
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[58]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">A</span><span class="o">=</span><span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[58]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-5x5 Array{Float64,2}:
- 0.696506    0.0310848  0.8425    0.360767  0.164839 
- 0.00884683  0.864284   0.647085  0.170653  0.0546205
- 0.127655    0.56418    0.541102  0.661327  0.462087 
- 0.877254    0.849883   0.75203   0.127464  0.610566 
- 0.635287    0.239945   0.122218  0.497725  0.015649 
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[59]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">b</span><span class="o">=</span><span class="n">rand</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[59]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-5-element Array{Float64,1}:
- 0.625647
- 0.796183
- 0.437029
- 0.690231
- 0.237018
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[62]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">x</span><span class="o">=</span><span class="n">A</span>\<span class="n">b</span> <span class="c"># solving for unknown x such that Ax=b</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[62]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-5-element Array{Float64,1}:
-  0.0807766
-  0.390174 
-  0.741278 
-  0.0169814
- -0.44526  
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[63]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">x</span><span class="o">=</span><span class="n">pinv</span><span class="p">(</span><span class="n">A</span><span class="p">)</span><span class="o">*</span><span class="n">b</span> <span class="c"># solving for unknown x such that Ax=b</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[63]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-5-element Array{Float64,1}:
-  0.0807766
-  0.390174 
-  0.741278 
-  0.0169814
- -0.44526  
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[64]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">A</span><span class="o">*</span><span class="n">x</span> <span class="c"># Ax=b</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[64]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-5-element Array{Float64,1}:
- 0.625647
- 0.796183
- 0.437029
- 0.690231
- 0.237018
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[67]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">l</span><span class="p">,</span><span class="n">v</span><span class="o">=</span><span class="n">eig</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[67]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-([2.196362464168248 + 0.0im,0.8199456549845309 + 0.0im,-0.10905071799417637 + 0.4821037975732591im,-0.10905071799417637 - 0.4821037975732591im,-0.553202273707936 + 0.0im],
-5x5 Array{Complex{Float64},2}:
- 0.453294+0.0im    0.591942+0.0im  0.237517+0.362899im  …  -0.00207193+0.0im
- 0.323786+0.0im   -0.686189+0.0im  0.232124+0.188288im      -0.0264009+0.0im
- 0.475423+0.0im  -0.0431197+0.0im      -0.556921+0.0im        0.203077+0.0im
- 0.595485+0.0im    0.191197+0.0im  0.192784-0.268164im       -0.751397+0.0im
- 0.330239+0.0im    0.374611+0.0im   0.15865-0.527397im        0.627265+0.0im)
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[68]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">methods</span><span class="p">(</span><span class="n">eig</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[68]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-# 3 methods for generic function &quot;eig&quot;:
-eig(m::SymTridiagonal{T&lt;:Union(Float32,Complex{Float64},Float64,Complex{Float32})}) at linalg/tridiag.jl:67
-eig(A::AbstractArray{T,2},B::AbstractArray{T,2}) at linalg/factorization.jl:579
-eig(A::Union(Number,AbstractArray{T,2})) at linalg/factorization.jl:502
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[69]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">v</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[69]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-5x5 Array{Complex{Float64},2}:
- 0.453294+0.0im    0.591942+0.0im  0.237517+0.362899im  …  -0.00207193+0.0im
- 0.323786+0.0im   -0.686189+0.0im  0.232124+0.188288im      -0.0264009+0.0im
- 0.475423+0.0im  -0.0431197+0.0im      -0.556921+0.0im        0.203077+0.0im
- 0.595485+0.0im    0.191197+0.0im  0.192784-0.268164im       -0.751397+0.0im
- 0.330239+0.0im    0.374611+0.0im   0.15865-0.527397im        0.627265+0.0im
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[70]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">function</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span> 
-  <span class="k">return</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="o">-</span><span class="n">y</span><span class="p">)</span>
-<span class="n">end</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[70]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-f (generic function with 2 methods)
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[71]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="p">(</span><span class="n">res1</span><span class="p">,</span><span class="n">res2</span><span class="p">)</span><span class="o">=</span><span class="n">f</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[71]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-(3,-1)
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[71]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">K</span><span class="o">=</span><span class="n">rand</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">);</span>
-<span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">v</span><span class="p">)</span><span class="o">=</span><span class="n">svd</span><span class="p">(</span><span class="n">K</span><span class="p">);</span>
-</pre></div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[72]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">K</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[72]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-2x2 Array{Float64,2}:
- 0.146306  0.350496
- 0.475416  0.94116 
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[73]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">v</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[73]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-2x2 Array{Float64,2}:
- -0.443469   0.89629 
- -0.89629   -0.443469
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[78]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">u</span><span class="o">*</span><span class="n">diagm</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">*</span><span class="n">v</span><span class="s">&#39;</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[78]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-2x2 Array{Float64,2}:
- 0.146306  0.350496
- 0.475416  0.94116 
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[79]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">ndims</span><span class="p">(</span><span class="n">K</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[79]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-2
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[80]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">size</span><span class="p">(</span><span class="n">K</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[80]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-(2,2)
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[81]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">typeof</span><span class="p">(</span><span class="n">K</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[81]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-Array{Float64,2}
-</pre>
-
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[81]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="n">x</span><span class="o">=</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-</pre></div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell vbox">
-<div class="input hbox">
-<div class="prompt input_prompt">
-In&nbsp;[82]:
-</div>
-<div class="input_area box-flex1">
-<div class="highlight"><pre><span class="p">[(</span><span class="n">i</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">)</span><span class="err">?</span><span class="s">&quot;+&quot;</span><span class="p">:</span><span class="s">&quot;-&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
-</pre></div>
-
-</div>
-</div>
-
-<div class="vbox output_wrapper">
-<div class="output vbox">
-
-
-<div class="hbox output_area"><div class="prompt output_prompt">
-    Out[82]:</div>
-<div class="box-flex1 output_subarea output_pyout">
-
-
-<pre>
-10-element Array{ASCIIString,1}:
- &quot;-&quot;
- &quot;+&quot;
- &quot;+&quot;
- &quot;+&quot;
- &quot;-&quot;
- &quot;+&quot;
- &quot;+&quot;
- &quot;+&quot;
- &quot;+&quot;
- &quot;+&quot;
+4x2 Array{Float64,2}:
+ 0.997177    0.0028127 
+ 0.995939    0.00404581
+ 0.00273109  0.997279  
+ 0.00298615  0.997025  
 </pre>
 
 </div>
