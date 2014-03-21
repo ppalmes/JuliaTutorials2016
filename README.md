@@ -8,4 +8,4 @@ These are random collections of tutorials to demonstrate [Julia's] (http://julia
 
 To get all the files: git clone https://github.com/ppalmes/JuliaHTML.git
 
-You must configure install [iJulia] (https://github.com/JuliaLang/IJulia.jl) if you want to edit the tutorials.
+You must install [iJulia] (https://github.com/JuliaLang/IJulia.jl) if you want to edit/extend/update the tutorials.
