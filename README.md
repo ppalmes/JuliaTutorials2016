@@ -1,8 +1,7 @@
 JuliaHTML
 =========
-# Julia Demo Tutorial
 
-## Background
+### Overview
 
 These are random collections of tutorials to demonstrate [Julia's] (http://julialang.org) capability. 
 
