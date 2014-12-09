@@ -14,3 +14,5 @@ Latest update of this tutorial covers the following topics:
 - Extreme Learning Machine Implementation
 - Deep Learning with RBM
 - Random Forest, Adaboost, SVM applications
+- Map-reduce and Distributed Arrays
+- Population-based random search with parallel implementation
