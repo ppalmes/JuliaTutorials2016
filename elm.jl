@@ -1,4 +1,5 @@
-import MyELM
+include("MyELM.jl")
+
 import RDatasets
 import DataFrames
 

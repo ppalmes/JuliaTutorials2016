@@ -1,6 +1,9 @@
-#!/Users/ppalmes/bin/julia
 
+module RBM
 using Winston
+
+export dream
+export showWeights
 
 function xp(x)
     return 1.0 ./ (1+exp(-x))
@@ -36,28 +39,38 @@ function cd(rbmw::Matrix{Float64},data::Matrix{Float64})
     return vh0-vh1
 end
 
+function showWeights(W::Matrix{Float64},row,col)
+    r,c = size(W)
+    plots = []
+    for i in 1:r
+        plots=vcat(plots,Winston.imagesc((reshape(W[i,:],28,28))'))
+    end
+    
+    mgrid=Winston.Table(row,col)
+    c=1
+    for i = 1:row
+        for j=1:col
+            mgrid[i,j] = plots[c]
+            c+=1
+        end
+    end  
+    display(mgrid)
+end
+
 function dream(rbmw::Matrix{Float64},data::Matrix{Float64})
     vdata=bernoulli(data)
     h0=bernoulli(vtohprob(rbmw,vdata))
     v1=bernoulli(htovprob(rbmw,h0))
+  
+    mgrid = Winston.Table(1,2)
     for i in 1:size(vdata)[2]
-        #PyPlot.matshow(reshape(vdata[:,i],28,28))
-        imagesc(reshape(vdata[:,i],28,28))
-        #PyPlot.matshow(reshape(v1[:,i],28,28))
-        imagesc(reshape(v1[:,i],28,28))
+        mgrid[1,1]=Winston.imagesc(reshape(vdata[:,i],28,28)')
+        mgrid[1,2]=Winston.imagesc(reshape(v1[:,i],28,28)')
+       display(mgrid)
+       readline(STDIN)
     end
     return v1
 end
-
-function showWeights(weights::Matrix{Float64})
-    r,c = size(W)
-    for row in 1:r
-        #PyPlot.matshow(reshape(W[row,:],28,28))
-        imagesc(reshape(W[row,:],28,28))
-    end
-end
-
-
 
 function rbm(nhid::Int,data::Matrix{Float64},lr::Float64,niter::Int64,mbatchsz::Int64,mom::Float64)
     psz,nsz=size(data)
@@ -71,7 +84,9 @@ function rbm(nhid::Int,data::Matrix{Float64},lr::Float64,niter::Int64,mbatchsz::
 
     startMini=1
     for iter in 1:niter
-        println("iter:",iter," ",sqrt(mean(map((x)->x*x,model))))
+        if mod(iter,50)==0
+            println("iter:",iter," ",sqrt(mean(map((x)->x*x,model))))
+        end
         mbatch=data[:,startMini:(startMini+mbatchsz-1)]
         startMini=(startMini+mbatchsz) % nsz
         gradient=cd(model,mbatch)
@@ -80,12 +95,13 @@ function rbm(nhid::Int,data::Matrix{Float64},lr::Float64,niter::Int64,mbatchsz::
     end
     return model
 end
+end
 
-
-#trainData=readdlm("mnist_train.csv",',',Float64)
-#trainLab=trainData[:,1]
-#trainData=trainData[:,2:size(trainData)[2]]/255.0
-#trainData=trainData'
+using RBM
+# trainData=readdlm("mnist_train.csv",',',Float64)
+# trainLab=trainData[:,1]
+# trainData=trainData[:,2:size(trainData)[2]]/255.0
+# trainData=trainData'
 
 testData=readdlm("mnist_test.csv",',',Float64)
 testLab=testData[:,1]
@@ -94,17 +110,16 @@ testData=testData'
 
 hidSz=30
 mbatchsz=100
-niter=20000
+#niter=20000
+niter = 500
 lr=0.01
 mom=0.9
 
-#model=rbm(hidSz,trainData,lr,niter,mbatchsz,mom)
+#W=RBM.rbm(hidSz,trainData,lr,niter,mbatchsz,mom)
 
 W=readcsv("weighnobias.csv")
 
-dream(W,testData[:,11:20])
-println("Test Data Dream State")
-readline(STDIN)
-showWeights(W)
-readline(STDIN)
-println("Features")
+RBM.dream(W,testData[:,1:50])
+RBM.showWeights(W,5,6)
+
+
